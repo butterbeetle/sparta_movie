@@ -33,7 +33,8 @@ const createCard = ({
   backdrop_path,
 }) => {
   const score = vote_average.toFixed(1) * 10 + "%";
-  const cardHTML = `
+
+  return `
   <li id=${id} class="card">
     <img src="https://image.tmdb.org/t/p/w500/${backdrop_path}" alt="${title} poster" />
     <div class="card-info">
@@ -49,8 +50,15 @@ const createCard = ({
     </div>
   </li>
   `;
+};
 
-  return cardHTML;
+/**
+ * 검색 결과 없을 시
+ */
+const empty = () => {
+  return `
+    <div class="main-empty">이런.. 검색 결과가 없네요..</div>
+  `;
 };
 
 /**
@@ -58,9 +66,11 @@ const createCard = ({
  */
 const printCard = (movies) => {
   const container = document.querySelector(".container");
-  movies.forEach((movie) => {
-    container.innerHTML += createCard(movie);
-  });
+  if (movies.length) {
+    movies.forEach((movie) => {
+      container.innerHTML += createCard(movie);
+    });
+  } else container.innerHTML += empty();
 };
 
 /**
