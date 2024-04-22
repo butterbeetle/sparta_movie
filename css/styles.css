@@ -1,1 +1,59 @@
 @import "reset.css";
+
+.header {
+  padding: 8px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: #a3a3a3 1px solid;
+}
+.header h1 {
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: bold;
+  user-select: none;
+}
+form {
+  display: flex;
+  gap: 4px;
+  flex-grow: 1;
+}
+form div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+form button {
+  background: #e5e5e5;
+  border: #a3a3a3 solid 1px;
+  transition: all 300ms ease-in;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 0 10px;
+  height: 30px;
+}
+form button:hover {
+  background: #d4d4d4;
+}
+input {
+  padding: 0 10px;
+  border: #a3a3a3 solid 1px;
+  border-right: none;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  max-width: 600px;
+  height: 30px;
+  outline: none;
+  width: 100%;
+  font-weight: bold;
+}
+
+input::placeholder {
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+}
