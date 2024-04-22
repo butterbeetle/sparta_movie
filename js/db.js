@@ -8,15 +8,16 @@ const options = {
 };
 
 /**
- * 방문 시 데이터 가져오기
+ * TMDB에서 데이터 가져오기
  */
-fetch(
+const abc = fetch(
   "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
   options
 )
   .then((response) => response.json())
   .then((response) => {
     printCard(response.results);
+    clickedCard();
   })
   .catch((err) => console.error(err));
 
@@ -59,5 +60,18 @@ const printCard = (movies) => {
   const container = document.querySelector(".container");
   movies.forEach((movie) => {
     container.innerHTML += createCard(movie);
+  });
+};
+
+/**
+ * 클릭 시 id를 alert으로 띄워주는 함수
+ */
+const clickedCard = () => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    const cardImage = card.firstElementChild;
+    cardImage.addEventListener("click", () => {
+      alert(`영화 Id : ${card.id}`);
+    });
   });
 };
