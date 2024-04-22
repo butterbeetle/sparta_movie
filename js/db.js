@@ -33,10 +33,14 @@ const createCard = ({
   backdrop_path,
 }) => {
   const score = vote_average.toFixed(1) * 10 + "%";
+  const imgPath = `https://image.tmdb.org/t/p/w500/${backdrop_path}`;
+  const emptyPath = `./assets/emptyImage.png`;
 
   return `
   <li id=${id} class="card">
-    <img src="https://image.tmdb.org/t/p/w500/${backdrop_path}" alt="${title} poster" />
+    <img src=${
+      backdrop_path === null ? emptyPath : imgPath
+    } alt="${title} poster" />
     <div class="card-info">
       <h2 class="card-info__title">${title}</h2>
       <div class="card-info__date">${release_date}</div>
