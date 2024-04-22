@@ -10,8 +10,8 @@ const options = {
 /**
  * TMDB에서 데이터 가져오기
  */
-const abc = fetch(
-  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+fetch(
+  "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
   options
 )
   .then((response) => response.json())
@@ -75,3 +75,30 @@ const clickedCard = () => {
     });
   });
 };
+
+/**
+ * card 지우기
+ */
+const deleteCard = () => {
+  const container = document.querySelector(".container");
+  container.innerHTML = "";
+};
+
+/**
+ * 검색
+ */
+document.getElementById("searchForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      deleteCard();
+      printCard(response.results);
+      clickedCard();
+    })
+    .catch((err) => console.error(err));
+});

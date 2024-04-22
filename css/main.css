@@ -53,6 +53,10 @@
   font-style: italic;
   font-weight: bold;
   height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .card-info__vote {
