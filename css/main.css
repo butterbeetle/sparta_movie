@@ -1,37 +1,35 @@
 .main {
   margin-top: 20px;
-  background: greenyellow;
 }
 
 .container {
   padding: 10px 0;
-  max-width: 1080px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
-  background: blueviolet;
-
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
-  grid-gap: 16px;
-  justify-content: center;
-  padding: initial; */
+  gap: 16px;
+  background: white;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 250px;
   padding: 12px;
-  gap: 12px;
+  gap: 16px;
   border: 1px solid white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   border-radius: 16px;
 }
+@media screen and (max-width: 666px) {
+  .card {
+    width: 400px;
+  }
+}
 .empty-card {
-  width: 180px;
+  width: 206px;
   height: 0;
 }
 .card img {
@@ -39,4 +37,48 @@
   border-radius: 16px;
   aspect-ratio: 1/1.2;
   object-fit: cover;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.card-info__title {
+  font-size: 21px;
+  font-style: italic;
+  font-weight: bold;
+  height: 40px;
+}
+
+.card-info__vote {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  gap: 2px;
+}
+.empty-star {
+  display: block;
+  width: 75px;
+  height: 15px;
+  background: url("../assets/star.png") no-repeat;
+}
+.shining-star {
+  display: block;
+  width: 75px;
+  height: 15px;
+  background: url("../assets/star.png") no-repeat 0 -15px;
+}
+.card-info__date {
+  font-size: 12px;
+}
+.card-info__description {
+  font-size: 14px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
