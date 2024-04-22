@@ -8,6 +8,14 @@ const options = {
 };
 
 /**
+ * 로딩스피너
+ */
+const loadingSpinner = document.querySelector(".spinnerContainer");
+const spinnerHandler = (state) => {
+  loadingSpinner.style.visibility = state;
+};
+spinnerHandler("visible");
+/**
  * TMDB에서 데이터 가져오기
  */
 fetch(
@@ -16,6 +24,7 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) => {
+    spinnerHandler("hidden");
     printCard(response.results);
     clickedCard();
   })
@@ -103,6 +112,8 @@ const deleteCard = () => {
  */
 document.getElementById("searchForm").addEventListener("submit", (e) => {
   e.preventDefault();
+  deleteCard();
+  spinnerHandler("visible");
   const query = document.getElementById("searchInput").value.toLowerCase();
   fetch(
     `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
@@ -110,7 +121,7 @@ document.getElementById("searchForm").addEventListener("submit", (e) => {
   )
     .then((response) => response.json())
     .then((response) => {
-      deleteCard();
+      spinnerHandler("hidden");
       printCard(response.results);
       clickedCard();
     })
