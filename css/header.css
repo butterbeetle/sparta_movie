@@ -7,6 +7,7 @@
   border-bottom: #a3a3a3 1px solid;
 }
 .header h1 {
+  cursor: pointer;
   font-size: 1.5em;
   font-style: italic;
   font-weight: bold;
