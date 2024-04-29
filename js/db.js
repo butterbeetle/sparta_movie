@@ -15,20 +15,6 @@ const spinnerHandler = (state) => {
   loadingSpinner.style.visibility = state;
 };
 spinnerHandler("visible");
-/**
- * TMDB에서 데이터 가져오기
- */
-fetch(
-  "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-  options
-)
-  .then((response) => response.json())
-  .then((response) => {
-    spinnerHandler("hidden");
-    printCard(response.results);
-    clickedCard();
-  })
-  .catch((err) => console.error(err));
 
 /**
  * Card 만드는 함수
@@ -108,22 +94,32 @@ const deleteCard = () => {
 };
 
 /**
- * 검색
+ * TMDB에서 데이터 가져오는 함수
+ */
+const getData = async (query = "") => {
+  let url = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1`;
+  if (query !== "") {
+    url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+  }
+  const response = await fetch(url, options);
+  const { results: data } = await response.json();
+
+  spinnerHandler("hidden");
+  printCard(data);
+  clickedCard();
+};
+
+/**
+ * 검색 기능
  */
 document.getElementById("searchForm").addEventListener("submit", (e) => {
   e.preventDefault();
+
   deleteCard();
   spinnerHandler("visible");
+
   const query = document.getElementById("searchInput").value.toLowerCase();
-  fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
-    options
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      spinnerHandler("hidden");
-      printCard(response.results);
-      clickedCard();
-    })
-    .catch((err) => console.error(err));
+  getData(query);
 });
+
+getData();
